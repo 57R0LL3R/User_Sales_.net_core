@@ -12,5 +12,8 @@ namespace Ventas_Usuario.Models
         public string? Brand { get; set; }
 
         public string? Price { get; set; }
+        public int IdUser { get; set; }
+
+        public User? User { get; set; }
     }
 }
