@@ -12,5 +12,7 @@ namespace Ventas_Usuario.Models
         public string? EmailAddress { get; set; }
 
         public string? Password { get; set; }
+
+        public List<Product> Products { get; set; } = new();
     }
 }
