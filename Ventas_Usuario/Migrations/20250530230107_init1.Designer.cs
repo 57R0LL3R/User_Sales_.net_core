@@ -11,8 +11,8 @@ using User_Sales.Models;
 namespace User_Sales.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250530013654_Init")]
-    partial class Init
+    [Migration("20250530230107_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,30 @@ namespace User_Sales.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("User_Sales.Models.User_Product", b =>
+                {
+                    b.Property<int>("IdUser_Product")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUser_Product"));
+
+                    b.Property<int>("IdProduct")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdUser_Product");
+
+                    b.HasIndex("IdProduct");
+
+                    b.ToTable("User_Products");
+                });
 
             modelBuilder.Entity("Ventas_Usuario.Models.Product", b =>
                 {
@@ -35,8 +59,11 @@ namespace User_Sales.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image_product")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -45,8 +72,6 @@ namespace User_Sales.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProduct");
-
-                    b.HasIndex("IdUser");
 
                     b.ToTable("Products");
                 });
@@ -73,20 +98,33 @@ namespace User_Sales.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Ventas_Usuario.Models.Product", b =>
+            modelBuilder.Entity("User_Sales.Models.User_Product", b =>
                 {
-                    b.HasOne("Ventas_Usuario.Models.User", "User")
-                        .WithMany("Products")
-                        .HasForeignKey("IdUser")
+                    b.HasOne("Ventas_Usuario.Models.Product", "Product")
+                        .WithMany("User_Products")
+                        .HasForeignKey("IdProduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Ventas_Usuario.Models.User", "User")
+                        .WithMany("User_Products")
+                        .HasForeignKey("IdProduct")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Ventas_Usuario.Models.Product", b =>
+                {
+                    b.Navigation("User_Products");
+                });
+
             modelBuilder.Entity("Ventas_Usuario.Models.User", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("User_Products");
                 });
 #pragma warning restore 612, 618
         }

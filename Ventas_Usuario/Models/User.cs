@@ -1,6 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
-namespace Ventas_Usuario.Models
+namespace User_Sales.Models
 {
     public class User
     {
@@ -13,6 +13,6 @@ namespace Ventas_Usuario.Models
 
         public string? Password { get; set; }
 
-        public List<Product> Products { get; set; } = new();
+        public List<User_Product> User_Products { get; set; } = new();
     }
 }

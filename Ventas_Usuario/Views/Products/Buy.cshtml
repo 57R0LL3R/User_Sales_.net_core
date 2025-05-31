@@ -1,0 +1,47 @@
+﻿@model User_Sales.Models.UserProductViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Buy" method="post">
+            <input asp-for="UserProduct.IdProduct" type="hidden" />
+            <div class="form-group">
+                <label asp-for="UserProduct.IdUser" class="control-label">Usuario</label>
+                <select asp-for="UserProduct.IdUser" asp-items="Model.Usuarios" class="form-control"></select>
+                <span asp-validation-for="UserProduct.IdUser" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Producto</label>
+                <input class="form-control" value="@Model.UserProduct.Product?.Name" disabled />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserProduct.Quantity" class="control-label">Quantity</label>
+                <input asp-for="UserProduct.Quantity" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

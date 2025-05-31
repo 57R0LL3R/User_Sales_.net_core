@@ -1,6 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
-namespace Ventas_Usuario.Models
+namespace User_Sales.Models
 {
     public class Product
     {
@@ -10,10 +10,9 @@ namespace Ventas_Usuario.Models
         public string? Name { get; set; }
 
         public string? Brand { get; set; }
-
+        public string? Image_product {  get; set; }
         public string? Price { get; set; }
-        public int IdUser { get; set; }
-
-        public User? User { get; set; }
+        public string? Description { get; set; }
+        public List<User_Product> User_Products { get; set; } = new();
     }
 }
