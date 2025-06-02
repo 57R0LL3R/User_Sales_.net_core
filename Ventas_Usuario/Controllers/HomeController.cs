@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Ventas_Usuario.Models;
+using User_Sales.Models;
 
 namespace Ventas_Usuario.Controllers
 {
