@@ -5,57 +5,29 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Productos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Crear nuevo</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Image_product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
 
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Image_product)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.IdProduct">Details</a> |
-                <a asp-action="Buy" asp-route-id="@item.IdProduct">Buy</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="@item.Image_product" class="card-img-top img-fluid mx-auto d-block" alt="@item.Name" style="max-height: 200px; object-fit: contain;" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text text-primary font-weight-bold">$@item.Price</p>
+                    <p class="card-text"><strong>Marca:</strong> @item.Brand</p>
+                    <p class="card-text">@item.Description</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.IdProduct">Detalles</a>
+                    <a class="btn btn-success btn-sm" asp-action="Buy" asp-route-id="@item.IdProduct">Comprar</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
